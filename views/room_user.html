@@ -1,0 +1,111 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Room Lists</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <!-------------------------Nav Bar------------------------------------>
+    <!-- nav bar -->
+    <nav class="p-4" style="background-color:#979082;">
+      <div class="row px-4">
+          <div class="col-3 h2 textc1 pt-2 ">
+              <a href="/views/G10HomeUser.html" class="textc1" style=" color: #ffffff; text-decoration: none;">Home</a>
+          </div>
+          <div class="col text-end h4 pt-2">
+              <!-- เปลี่ยนlinkเป็น.htmlนะ -->
+              <a href="/views/room_list_user.html" class="textc1 mx-3" style=" color: #ffffff; text-decoration: none;">Room List</a>
+              <a href="/views/history_student.html" class="mx-3 textc1" style=" color: #ffffff; text-decoration: none;">History</a>
+              <button id="signoutBTN" class="btn btn-outline-light mx-3" style=" color: #ffffff; text-decoration: none;">Logout</button>
+          </div>
+      </div>
+  </nav>
+
+
+    <!-- <div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+        <div class="input-group search-bar">
+            <input type="text" class="form-control" placeholder="Search Room Name .....">
+            <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button">Search</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div> -->
+      
+
+    <div class="container mt-3 table-responsive">
+        <!---------------------create table---------------------------------->
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th class="text-center bg-dark text-white fs-4" id="">Picture</th>
+                    <th class="text-start bg-dark text-white fs-4" id="">Room Name</th>
+                    <th class="text-center bg-dark text-white fs-4" id="">Time</th>
+                    <th class="tex-start bg-dark text-white fs-4" id="">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% rooms.forEach(room => { %>
+                <tr>
+                    <td class="text-dark mx-4 text-center">
+                        <img src="<%= room.image_path %>" alt="room" width="350px" height="200px">
+                    </td>
+                    <td class="text-white mx-4 text-center">
+                        <div class="text-start text-dark"> 
+                            <h4><%= room.room_name %></h4>
+                        </div>
+                    </td>
+             
+                    <td class="border-0">
+                        <div class="mt-2">
+                            <% room.timeSlots.forEach(slot => { %>
+                            <p class=" border-2 px-3 py-2"><%= slot.start_time %> - <%= slot.end_time %></p>
+                            <% }); %>
+                        </div>
+                    </td>
+                    <td class="border-0">
+                            <% room.timeSlots.forEach(slot => { %>
+                            <div class="mt-2">
+                                <% if (slot.status === "free") { %> 
+                                    <button class="btn btn-success btn-md px-3 py-2 text-center">
+                                        <a href="/booking/?roomId=<%= room.room_id %>&userId=<%= userId %>&slotId=<%= slot.slot_id %>" class="text-white px-3">
+                                          <%= slot.status %>
+                                        </a>
+                                      </button>
+                                <% } else if (slot.status === 'pending') { %>
+                                    <button class="btn btn-secondary btn-md px-3 py-2 text-center"><%= slot.status %></button>
+                                <% } else if (slot.status === 'reserved') { %>
+                                    <button class="btn btn-warning btn-md px-3 py-2  text-center"><%= slot.status %></button>
+                                <% } else if (slot.status === 'disabled') { %>
+                                    <button class="btn btn-danger btn-md px-3 py-2 text-center"><%= slot.status %></button>
+                                <% } %>
+                            </div>
+                            <% }); %>   
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>
